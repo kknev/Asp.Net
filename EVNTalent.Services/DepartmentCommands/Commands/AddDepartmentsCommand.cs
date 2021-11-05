@@ -1,32 +1,29 @@
-﻿using EVNTalent.Services.Common.Infrastructure;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace EVNTalent.Services.DepartmentCommands.Commands
+﻿namespace EVNTalent.Services.DepartmentCommands.Commands
 {
-    public class AddDepartmentsCommand : IRequest
+    using System.Threading;
+    using System.Threading.Tasks;
+    using MediatR;
+    using Services.Common.Infrastructure;
+    using Domain.Entities;
+    using EVNTalent.Services.Common.Interfaces;
+    using AutoMapper;
+
+    public class AddDepartmentsCommand : IRequest<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }
     }
-    public class AddDepartmentsCommandHandler : IRequestHandler<AddDepartmentsCommand>
+    public class AddDepartmentsCommandHandler : AppIRequestHandler<AddDepartmentsCommand, int>
     {
-        public readonly ApplicationDbContext _dbContext;
-        public AddDepartmentsCommandHandler(ApplicationDbContext dbContext) => _dbContext = dbContext;
-        public async Task<Unit> Handle(AddDepartmentsCommand request, CancellationToken cancellationToken)
+        public AddDepartmentsCommandHandler(IApplicaitonDbContext data, IMapper mapper) : base(data, mapper)
         {
-            await _dbContext.Departments.AddAsync(new Domain.Entities.Department()
-            {
-                Name = request.Name,
-                Description = request.Description
-            });
-            await _dbContext.SaveChangesAsync(); 
-            return Unit.Value;
+        }
+
+        public override async Task<int> Handle(AddDepartmentsCommand request, CancellationToken cancellationToken)
+        {
+            await _data.Departments.AddAsync(_mapper.CreateMapper().Map<Department>(request));
+            int value = await _data.SaveChangesAsync(); 
+            return (value);
         }
     }
 }

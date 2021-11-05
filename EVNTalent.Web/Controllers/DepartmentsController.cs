@@ -1,20 +1,17 @@
-﻿using EVNTalent.Services.DepartmentCommands.Commands;
+﻿namespace EVNTalent.Web.Controllers
+{
+using EVNTalent.Services.DepartmentCommands.Commands;
 using EVNTalent.Services.DepartmentCommands.Query.DepartmentList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-namespace EVNTalent.Web.Controllers
-{
-    [ApiController]
-    public class DepartmentsController : ControllerBase
+    
+    public class DepartmentsController : ApiController
     {
-        private readonly IMediator _mediator;
+        public DepartmentsController(IMediator mediator) : base(mediator)
+        {
+        }
 
-        public DepartmentsController(IMediator mediator) => _mediator = mediator;
         [HttpGet]
         public async Task<IActionResult> GetListController()
         {
