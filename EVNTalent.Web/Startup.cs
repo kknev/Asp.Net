@@ -1,9 +1,9 @@
 namespace EVNTalent.Web
 {
     using System;
-    using AutoMapper;
     using EVNTalent.Services.Common.Infrastructure;
     using MediatR;
+    using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
@@ -12,6 +12,7 @@ namespace EVNTalent.Web
     using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.SpaServices.AngularCli;
     using EVNTalent.Services.Common.Interfaces;
+    using EVNTalent.Services.Common.Extensions;
 
     public class Startup
     {
@@ -31,6 +32,15 @@ namespace EVNTalent.Web
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddControllers();
+
+            services.AddFluentValidation(config => {
+                //config.RegisterValidatorsFromAssemblyContaining<CandidateCreateCommandValidation>();
+                config.AutomaticValidationEnabled = true;
+                config.DisableDataAnnotationsValidation = true;
+                config.ImplicitlyValidateChildProperties = true;
+                config.ImplicitlyValidateRootCollectionElements = true;
+            });
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -39,9 +49,9 @@ namespace EVNTalent.Web
             services.AddTransient<IApplicaitonDbContext, ApplicationDbContext>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMediator mediatR)
         {
-            //Todo prepare DB
+            app.PrepareDatabse(mediatR);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
