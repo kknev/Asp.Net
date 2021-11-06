@@ -37,12 +37,12 @@ export class CandidateAddEditFormComponent implements OnInit {
     this.id = this.activateRoute.snapshot.params['id'];
     this.http.get(this.url + "/department/all").subscribe(data => this.departments = data['departmentList'])
     this.isEditMode=this.id!=undefined && this.id.length>0;
-  
-this.isEditMode
- ? this.http.get(this.url + "/candidate/"+this.id).subscribe(result=>{
-    this.createForm.setValue(result);
-})
-: this.createForm=this.OnIt();
+  this.isEditMode
+     ? this.http.get(this.url + "/candidate/details/"+this.id).subscribe(result=>{
+       console.log(result)
+       this.createForm.setValue(result['candidate']);
+      })
+    : this.createForm=this.OnIt();
   }
 OnIt=()=>  this.fb.group({
     'id': [null, Validators.required],
@@ -57,78 +57,51 @@ OnIt=()=>  this.fb.group({
   });
 
   onCreate() {
+    this.errors= new GetError();
     this.createForm.value['birthDate']
       ? null
       : this.createForm.value['birthDate'] = '1969-01-01';
       if (!this.isEditMode){
         this.http.post(this.url+"/candidate/create",this.createForm.value)
   .subscribe(data => {
-    console.log(data)
+    this.successfulSave = true;
   this.router.navigate(['/']);
   },err=>{
     console.log(err)
     this.successfulSave = false;
     if (err.status === 400) {
-      console.log(this.errors)
               this.errors.FirstName = err.error.errors['FirstName']?err.error.errors['FirstName']: [];
               this.errors.MiddleName = err.error.errors['MiddleName']?err.error.errors['MiddleName']:[];
               this.errors.LastName = err.error.errors['LastName']?err.error.errors['LastName']: [];
               this.errors.DepartmentName = err.error.errors['DepartmentName']?err.error.errors['DepartmentName']: [];
               this.errors.BirthDate = err.error.errors['BirthDate']?err.error.errors['BirthDate']: [];
               this.errors.Score = err.error.errors['Score']?err.error.errors['Score']: [];
-      console.log(this.errors)
     }
   });
       }else{
-        this.http.put(this.http +"/candidate/edit/" +this.id, this.createForm.value)
+        this.http.put(this.url +"/candidate/update/" +this.id, this.createForm.value)
            .subscribe(data=>{
-            console.log(data)
-
-           }, err=>{
-
-            console.log(err)
+            this.successfulSave=true; 
+            this.router.navigate(['/details/'+this.id])}
+           , err=>{
+             this.successfulSave=false;
+            for (const e of err.error) {
+                                            switch(e['propertyName']){
+                                              case'FirstName': this.errors.FirstName.push(e['errorMessage']);break;
+                                              case'MiddleName':this.errors.MiddleName.push(e['errorMessage']);break;
+                                              case'LastName':this.errors.LastName.push(e['errorMessage']);break;
+                                              case'DepartmentName':this.errors.DepartmentName .push(e['errorMessage']);break;
+                                              case'BirthDate':this.errors.BirthDate.push(e['errorMessage']);break;
+                                              case'Education':this.errors.Education.push(e['errorMessage']);break;
+                                              case'Score':this.errors.Score.push(e['errorMessage']);break;
+                                            }
+                                }
            });
       }
   }
 
 
-//  updateOn(){
-//   console.log("Update")
-//   this.http.put(this.http +"/candidate/edit/" +this.id, this.createForm.value)
-//   .subscribe(
-//           data =>{ 
-//             console.log(data);
-//             //  this.router.navigate(['details/'+this.id])
-//           }
-//           , err => {
-//             console.log(err)
-//               this.successfulSave = false;
-//             if (err.status === 400 ) {
-//               console.log(err.error);
-//               this.errors=new GetError();
-//               // this.errors.FirstName =  [];
-//               // this.errors.MiddleName =  [];
-//               // this.errors.LastName =  [];
-//               // this.errors.DepartmentName =  [];
-//               // this.errors.BirthDate =  [];
-//               // this.errors.Score =  [];
-//                   for (const e of err.error) {
-//                               switch(e['propertyName']){
-//                                 case'FirstName': this.errors.FirstName.push(e['errorMessage']);break;
-//                                 case'MiddleName':this.errors.MiddleName.push(e['errorMessage']);break;
-//                                 case'LastName':this.errors.LastName.push(e['errorMessage']);break;
-//                                 case'DepartmentName':this.errors.DepartmentName .push(e['errorMessage']);break;
-//                                 case'BirthDate':this.errors.BirthDate.push(e['errorMessage']);break;
-//                                 case'Education':this.errors.Score.push(e['errorMessage']);break;
-//                                 case'Score':this.errors.Score.push(e['errorMessage']);break;
-//                               }
-//                   }
-//             } else {
-//               this.errors.Fatal.push("Something went wrong!"+err.error);
-//             }
-//           }
-//         )
-//  }
+
   get firstName() { return this.createForm.get('firstName'); }
   get middleName() { return this.createForm.get('firstName'); }
   get lastName() { return this.createForm.get('lastName'); }

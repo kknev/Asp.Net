@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import { CandidateService } from '../services/candidate.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +17,6 @@ export class HomeComponent implements OnInit {
     private activateRouter: ActivatedRoute,
     private http:HttpClient,
     @Inject('BASE_URL') baseUrl: string
-    // private candidateService: CandidateService
     ) {
       this.url = baseUrl+"api/candidate"
   }
@@ -31,26 +29,24 @@ export class HomeComponent implements OnInit {
         ? _param.push("NaN")
         : _param = (params["query"].split(" "));
 
+        console.log(_param)
       switch (_param[0]) {
         case 'sort':
           this.http.get(this.url +`/sort?query=${_param[1]}%20${_param[2]}`)
-          // this.candidateService.sort({isMine:_param[1], name: _param[2], arrow: _param[3] })
             .subscribe(result => {
               console.log(result)
-            //  this.users = result
+             this.users = result['candidates']
             });
           break;
         case 'filter':
           this.http.post(this.url + "/filter", JSON.parse(_param[1]))
-        //  this.candidateService.filter(JSON.parse(_param[1]))
           .subscribe(result => {
 
             console.log(result)
-            // this.users = result;
+            this.users = result['candidates']
           })
           break;
         default:
-        //  this.candidateService.getAll()
         console.log("On Loading")
         this.http.get(this.url + "/all").subscribe(result => {
             
