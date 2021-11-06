@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CandidateAddEditFormComponent } from './candidate-add-edit-form/candidate-add-edit-form.component';
-// import { CandidateDetailsComponent } from './candidate-details/candidate-details.component';
- import { FilterComponent } from './fragments/filter/filter.component';
- import { FooterComponent } from './fragments/footer/footer.component';
+import { CandidateDetailsComponent } from './candidate-details/candidate-details.component';
+import { FilterComponent } from './fragments/filter/filter.component';
+import { FooterComponent } from './fragments/footer/footer.component';
 import { NavBarComponent } from './fragments/nav-bar/nav-bar.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { NavBarComponent } from './fragments/nav-bar/nav-bar.component';
     AppComponent,
    HomeComponent,
     CandidateAddEditFormComponent,
-    // CandidateDetailsComponent,
+    CandidateDetailsComponent,
     FilterComponent,
    FooterComponent,
     NavBarComponent,
@@ -29,8 +29,8 @@ import { NavBarComponent } from './fragments/nav-bar/nav-bar.component';
     FormsModule,
     RouterModule.forRoot([
        { path: '', component: HomeComponent, pathMatch: 'full' },
-      // { path: 'details/:id', component: CandidateDetailsComponent },
-       { path: 'eidt/:id', component: CandidateAddEditFormComponent },
+       { path: 'details/:id', component: CandidateDetailsComponent },
+       { path: 'edit/:id', component: CandidateAddEditFormComponent },
        { path: 'create', component: CandidateAddEditFormComponent },
     ])
   ],

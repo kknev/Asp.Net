@@ -13,6 +13,7 @@ namespace EVNTalent.Web
     using Microsoft.AspNetCore.SpaServices.AngularCli;
     using EVNTalent.Services.Common.Interfaces;
     using EVNTalent.Services.Common.Extensions;
+    using EVNTalent.Services.Common.ValidationHandler;
 
     public class Startup
     {
@@ -35,7 +36,8 @@ namespace EVNTalent.Web
             services.AddControllers();
 
             services.AddFluentValidation(config => {
-                //config.RegisterValidatorsFromAssemblyContaining<CandidateCreateCommandValidation>();
+                config.RegisterValidatorsFromAssemblyContaining<ValidationCandidateCreate>();
+                config.RegisterValidatorsFromAssemblyContaining<ValidationDeparmetntAdd>();
                 config.AutomaticValidationEnabled = true;
                 config.DisableDataAnnotationsValidation = true;
                 config.ImplicitlyValidateChildProperties = true;
