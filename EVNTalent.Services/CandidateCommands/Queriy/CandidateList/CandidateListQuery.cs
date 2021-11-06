@@ -8,6 +8,7 @@
     using MediatR;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -25,6 +26,7 @@
         {
             return  new CandidateListQueryResult { 
             Candidates= await _data.Candidates
+            .Where(c=>!c.IsDeleted)
             .ProjectTo<CandidateViewModel>(_mapper)
             .ToListAsync()
             };

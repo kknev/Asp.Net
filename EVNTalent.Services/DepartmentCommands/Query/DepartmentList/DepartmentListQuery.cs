@@ -1,6 +1,7 @@
 ﻿namespace EVNTalent.Services.DepartmentCommands.Query.DepartmentList
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -24,6 +25,7 @@
             return new DepartmentListQueryResult()
             {
                 DepartmentList = await _data.Departments
+                .Where(d=>!d.IsDeleted)
                 .ProjectTo<DepartmentViewModel>(_mapper)
                 .ToListAsync()
             };

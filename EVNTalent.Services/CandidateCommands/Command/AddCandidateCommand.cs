@@ -1,15 +1,15 @@
 ﻿namespace EVNTalent.Services.CandidateCommands.Command
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using AutoMapper;
     using EVNTalent.Domain.Entities;
     using EVNTalent.Services.Common.Extensions;
     using EVNTalent.Services.Common.Infrastructure;
     using EVNTalent.Services.Common.Interfaces;
     using MediatR;
-    using System;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
   public  class AddCandidateCommand : IRequest<string>
     {
         public string FirstName { get; set; }

@@ -6,8 +6,6 @@
     using EVNTalent.Services.Common.Infrastructure;
     using EVNTalent.Services.Common.Interfaces;
     using MediatR;
-    using Domain.Entities;
-using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Linq;
@@ -26,12 +24,13 @@ using System.Text;
         public override async Task<CandidateByIdQueryResult> Handle(CandidateByIdQuery request, CancellationToken cancellationToken)
         {
             // Candidate candidate = await _data.Candidates.FindAsync( request.Id);
-            CandidateDetailsViewModel candidateDetailsViewModel = _data.Candidates.Where(c => c.Id.ToString().Equals(request.Id))
-                .ProjectTo<CandidateDetailsViewModel>(_mapper).FirstOrDefault();
             return new CandidateByIdQueryResult
             {
-                Candidate = candidateDetailsViewModel
-            };
+                Candidate = _data.Candidates
+                                .Where(c => c.Id.ToString().Equals(request.Id) && !c.IsDeleted)
+                                .ProjectTo<CandidateDetailsViewModel>(_mapper)
+                                .FirstOrDefault()
+        };
         }
     }
     public class CandidateByIdQueryResult
