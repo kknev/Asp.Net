@@ -37,7 +37,7 @@ export class CandidateAddEditFormComponent implements OnInit {
     this.id = this.activateRoute.snapshot.params['id'];
     this.http.get(this.url + "/department/all").subscribe(data => this.departments = data['departmentList'])
     this.isEditMode=this.id!=undefined && this.id.length>0;
-  this.isEditMode
+    this.isEditMode
      ? this.http.get(this.url + "/candidate/details/"+this.id).subscribe(result=>{
        console.log(result)
        this.createForm.setValue(result['candidate']);
@@ -64,8 +64,9 @@ OnIt=()=>  this.fb.group({
       if (!this.isEditMode){
         this.http.post(this.url+"/candidate/create",this.createForm.value)
   .subscribe(data => {
+    console.log(data["id"])
     this.successfulSave = true;
-  this.router.navigate(['/']);
+    this.router.navigate(['/details/'+data['id']])
   },err=>{
     console.log(err)
     this.successfulSave = false;
@@ -82,7 +83,7 @@ OnIt=()=>  this.fb.group({
         this.http.put(this.url +"/candidate/update/" +this.id, this.createForm.value)
            .subscribe(data=>{
             this.successfulSave=true; 
-            this.router.navigate(['/details/'+this.id])}
+            this.router.navigate(['/details/'+[data['id']]])}
            , err=>{
              this.successfulSave=false;
             for (const e of err.error) {

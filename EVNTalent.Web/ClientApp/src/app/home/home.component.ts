@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   
   constructor(
     private activateRouter: ActivatedRoute,
+    private router:Router,
     private http:HttpClient,
     @Inject('BASE_URL') baseUrl: string
     ) {
@@ -59,8 +60,27 @@ export class HomeComponent implements OnInit {
 
     })
   }
+  onDelete(id:string){
+
+if  (!id){
+  alert('No identifer');
+}
+
+var x = confirm("Are you sure you want to delete?");
+
+if (x){
+  this.http.delete(this.url+"/delete/"+ id).subscribe(result=>{console.log('Result from action delete: '+result)
+  this.http.get(this.url + "/all").subscribe(result => {
+            
+    console.log(result)
+    this.users = result['candidates'];
+  });
+})
 
 }
+}
+}
+
 
 
 export interface User {

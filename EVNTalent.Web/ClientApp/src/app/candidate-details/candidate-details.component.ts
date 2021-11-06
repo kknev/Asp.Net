@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -39,7 +38,7 @@ ngOnInit(): void {
   onDelete(){
    
     this.http.delete(this.url+"/delete/"+ this.id).subscribe(result=>{console.log('Result from action delete: '+result)
- //     this.router.navigate(['/']);
+    this.router.navigate(['/']);
     })
   }
  

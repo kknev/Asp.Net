@@ -92,6 +92,7 @@
               <div class="nav-item dropdown">
                   <a class="navbar-brand"  href="/details/{{user.id}}">Details</a>
                   <a class="navbar-brand"  href="/edit/{{user.id}}">Edit</a>
+                  <button class="navbar-brand"  (click)="onDelete(user.id)">DELETE</button>
               </div>
             </td>
           </tr>

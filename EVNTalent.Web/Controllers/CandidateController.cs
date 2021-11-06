@@ -35,8 +35,8 @@
             {
                 return BadRequest(validationResult.Errors);
             }
-            var result = await _mediator.Send(model);
-            return Ok(result);
+            string id = await _mediator.Send(model);
+            return Ok(new { Id=id});
         }
 
         [HttpGet]
@@ -79,8 +79,8 @@
             try
             {
                 candidateDto.Id = id;
-                var result = await _mediator.Send(candidateDto);
-                return Ok(result);
+                string resultId = await _mediator.Send(candidateDto);
+                return Ok(new { Id=resultId});
             }
             catch (Exception ex)
             {
