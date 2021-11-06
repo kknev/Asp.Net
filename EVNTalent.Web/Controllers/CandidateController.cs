@@ -41,7 +41,7 @@
 
         [HttpGet]
         [Route("details/{id}")]
-        public async Task<IActionResult> DetauilsById([FromRoute] string id)
+        public async Task<IActionResult> DetailsById([FromRoute] string id)
         {
             if (id == null)
             {
@@ -65,7 +65,7 @@
 
         [HttpPut]
         [Route("update/{id}")]
-        public async Task<ActionResult> Update([FromRoute] string id, EditCandidateCommand candidateDto)
+        public async Task<IActionResult> Update([FromRoute] string id, EditCandidateCommand candidateDto)
         {
             if (id == null)
             {
@@ -90,14 +90,14 @@
 
         [HttpPost]
         [Route("filter")]
-        public async Task<ActionResult> filter(FilterCandidateQeury filter)
+        public async Task<IActionResult> filter(FilterCandidateQeury filter)
         {
             var result = await _mediator.Send(filter);
             return Ok(result);
         }
         [HttpGet]
         [Route("sort")]
-        public async Task<ActionResult> Sort([FromQuery] String query)
+        public async Task<IActionResult> Sort([FromQuery] String query)
         {
            
             SortByCandidateQuery _sort = new SortByCandidateQuery {   Query=query };

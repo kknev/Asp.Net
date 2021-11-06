@@ -49,6 +49,7 @@ namespace EVNTalent.Web
             });
 
             services.AddTransient<IApplicaitonDbContext, ApplicationDbContext>();
+            services.AddScoped<IMediator, Mediator>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMediator mediatR)

@@ -75,6 +75,7 @@ OnIt=()=>  this.fb.group({
               this.errors.MiddleName = err.error.errors['MiddleName']?err.error.errors['MiddleName']:[];
               this.errors.LastName = err.error.errors['LastName']?err.error.errors['LastName']: [];
               this.errors.DepartmentName = err.error.errors['DepartmentName']?err.error.errors['DepartmentName']: [];
+              this.errors.Education = err.error.errors['Education']?err.error.errors['Education']: [];
               this.errors.BirthDate = err.error.errors['BirthDate']?err.error.errors['BirthDate']: [];
               this.errors.Score = err.error.errors['Score']?err.error.errors['Score']: [];
     }
