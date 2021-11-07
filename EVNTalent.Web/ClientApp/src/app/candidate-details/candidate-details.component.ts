@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CandidateService } from '../services/candidate/candidate.service';
 
 @Component({
   selector: 'app-candidate-details',
@@ -10,63 +10,59 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CandidateDetailsComponent implements OnInit {
 
-  id: string="";
+  id: string = "";
   user = new ClassUser;
-  url: string;
 
   constructor(private activateRouter: ActivatedRoute,
-    private router:Router,
+    private router: Router, private candidateService: CandidateService,
     private activateRoute: ActivatedRoute,
-    private http:HttpClient,
-    @Inject('BASE_URL') baseUrl: string
-    ) {
+  ) {
+    this.id = this.activateRoute.snapshot.params['id'];
+  }
 
-      this.url = baseUrl+"api/candidate"
-      this.id = this.activateRoute.snapshot.params['id'];
+
+  ngOnInit(): void {
+    this.id = this.activateRouter.snapshot.params['id'];
+
+    this.candidateService.loadCandidate(this.id)
+      .subscribe(result => {
+        console.log(result);
+        this.user = result['candidate'];
+      });
+  }
+  onDelete() {
+    this.candidateService.delete(this.id)
+      .subscribe(result => {
+        console.log('Result from action delete: ' + result)
+        this.router.navigate(['/']);
+      })
+  }
+
 }
 
-
-ngOnInit(): void {
-    this.id= this.activateRouter.snapshot.params['id'];
-    console.log(this.id)
-    this.http.get(this.url+"/details/"+ this.id).subscribe(result=>{
-      console.log(this.url)
-      console.log(result);
-      this.user=result['candidate'];
-    });
+export class ClassUser {
+  constructor() {
+    this.firstName = "";
+    this.lastName = "";
+    this.middleName = "";
+    this.id = "";
+    this.departmentName = "";
+    this.education = "";
+    this.birthDate = new Date("1978-02-03");
+    this.user = "";
+    this.isOwner = false;
+    this.score = 0;
+    this.isDeleted = false;
   }
-  onDelete(){
-   
-    this.http.delete(this.url+"/delete/"+ this.id).subscribe(result=>{console.log('Result from action delete: '+result)
-    this.router.navigate(['/']);
-    })
-  }
- 
-}
-
- export class  ClassUser{
-   constructor(){
-     this.firstName="";
-     this.lastName="";
-     this.middleName="";
-     this.id="";
-     this.departmentName="";
-     this.education="";
-     this.birthDate= new Date("1978-02-03");
-     this.user="";
-     this.isOwner=false;
-     this.score=0;
-     this.isDeleted=false;
-    }
-    firstName:string;
-    lastName:string;
-    middleName:string;
-    id:string;
-    departmentName:string;
-    education:string;
-    birthDate: Date;
-    score:number;
-    user:string;
-    isOwner:boolean;
-    isDeleted:boolean;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  id: string;
+  departmentName: string;
+  education: string;
+  birthDate: Date;
+  score: number;
+  user: string;
+  isOwner: boolean;
+  isDeleted: boolean;
 }

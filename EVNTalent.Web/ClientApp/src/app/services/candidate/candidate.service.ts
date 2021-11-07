@@ -20,5 +20,16 @@ export class CandidateService {
   loadFilter(_param: any) {
     return this.http.post(this.url + "/filter", _param);
   }
-
+  createCandidate(data: any) {
+    return this.http.post(this.url + "/create", data);
+  }
+  editCandidate(id: string, data: any) {
+    return this.http.put(this.url + "/update/" + id, data);
+  }
+  loadCandidate(id: string) {
+    return this.http.get(this.url + "/details/" + id);
+  }
+  delete(id: string) {
+    return this.http.delete(this.url + "/delete/" + id)
+  }
 }
