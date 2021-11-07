@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
             });
           break;
         case 'filter':
+          console.log(_param)
           this.candidateService.loadFilter(JSON.parse(_param[1]))
             //     this.http.post(this.url + "/filter", JSON.parse(_param[1]))
             .subscribe(result => {

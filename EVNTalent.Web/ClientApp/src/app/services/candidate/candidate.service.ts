@@ -18,7 +18,7 @@ export class CandidateService {
     return this.http.get(this.url + `/sort?query=${_param[1]}%20${_param[2]}`);
   }
   loadFilter(_param: any) {
-    return this.http.get(this.url + "/filter", _param);
+    return this.http.post(this.url + "/filter", _param);
   }
 
 }

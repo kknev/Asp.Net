@@ -17,10 +17,10 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private http:HttpClient,
+    private http: HttpClient,
     private fb: FormBuilder,
-     @Inject('BASE_URL') baseUrl: string) {
-      this.url = baseUrl+"api/department"
+    @Inject('BASE_URL') baseUrl: string) {
+    this.url = baseUrl + "api/department"
     this.filterForm = this.fb.group({
       'name': [null, Validators.required],
       'department': ["Select...", Validators.required],
@@ -36,27 +36,29 @@ export class FilterComponent implements OnInit {
       'scoreSort': [null, Validators.required],
       'birthYearSort': [null, Validators.required],
 
-      'isMine':[false,Validators.required]
     });
 
   }
 
   ngOnInit(): void {
-    this.http.get(this.url + "/all").subscribe(data =>
-      {
-        console.log(data);
-       this.departments = data['departmentList'];
-      } )
+    this.http.get(this.url + "/all").subscribe(data => {
+      console.log(data);
+      this.departments = data['departmentList'];
+    })
   }
   onFilter() {
     this.checkOptionField();
-    let searchResult=Object.entries(this.filterForm.value)
-                          .filter(([k,v])=>v!=null)
-                          .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
-console.log(searchResult );
-    this.router.navigate(['/'], { queryParams: { "query": "filter " + JSON.stringify(
-      searchResult)
-  }});}
+    let searchResult = Object.entries(this.filterForm.value)
+      .filter(([k, v]) => v != null)
+      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+    console.log(searchResult);
+    this.router.navigate(['/'], {
+      queryParams: {
+        "query": "filter " + JSON.stringify(
+          searchResult)
+      }
+    });
+  }
 
   checkOptionField() {
     this.filterForm.value['department'] = this.filterForm.value['department'] == "Select..."
@@ -83,7 +85,6 @@ console.log(searchResult );
   get scoreSort() { return this.filterForm.get('scoreSort') }
   get birthYearSort() { return this.filterForm.get('birthYearSort') }
 
-  get isMine() { return this.filterForm.get('isMine') }
 }
 
 export interface Deparment {
