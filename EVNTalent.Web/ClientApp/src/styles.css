@@ -72,15 +72,16 @@ color: white;
 .edit{
 background-color: green;
   }
-  .delete{
 
+  .delete{
     background-color: red;
   }
+
   .details{margin: 10px;}
 
 .body{
   padding-left: 2%;
-  padding-right: 2%;
+  padding-right: 1%;
 
 }
 
@@ -94,4 +95,14 @@ footer{background-color: grey;}
 footer span{
   color: whitesmoke;
   font-size: 70%;
+}
+.form-inline label{
+  margin-left: 2px;
+  padding-left: 4px;
+}
+.form-inline {
+  padding: 2px;
+}
+.back{
+  background-color: blue;
 }

@@ -100,7 +100,7 @@
             </td>
 
             <td>
-              {{user.birthDate}}
+              {{user.birthDate |   date:'yyyy-MM-dd'}}
             </td>
 
             <td>
@@ -109,8 +109,8 @@
 
             <td>
               <div class="">
-                 <a href="/edit/{{user.id}}"><button class="btn-options edit">Edit</button></a>
-                  <button class="btn-options delete"  (click)="onDelete(user.id)">DELETE</button>
+                 <a href="/edit/{{user.id}}"><button class="btn-options edit details">Edit</button></a>
+                  <button class="btn-options delete details"  (click)="onDelete(user.id)">DELETE</button>
               </div>
             </td>
           </tr>

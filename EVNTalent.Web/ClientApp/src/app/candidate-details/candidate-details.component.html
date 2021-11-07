@@ -34,7 +34,7 @@
 
           <div class="form-group">
             <label class="control-label">Birth Date</label>
-            <input  class="form-control"  disabled  value="{{user.birthDate}}"/>
+            <input  class="form-control"  disabled  value="{{user.birthDate |  date:'yyyy-MM-dd'}}"/>
 
           </div>
 
@@ -47,8 +47,8 @@
 
           <div  class="form-group">
            <button class="btn-options delete details" (click)="onDelete()">Delete</button>
-
               <a  href="/edit/{{user.id}}"> <button class="btn-options edit details" >Edit</button> </a>
+              <a href="/" > <button type="button" class="btn-options details back">Back</button> </a>
           </div>
         </div>
   </div>
