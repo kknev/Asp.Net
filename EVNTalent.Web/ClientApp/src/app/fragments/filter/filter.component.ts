@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DepartmentService } from 'src/app/services/candidate/department.service';
 
 @Component({
   selector: 'app-filter',
@@ -12,15 +13,12 @@ import { Router } from '@angular/router';
 export class FilterComponent implements OnInit {
   public filterForm: FormGroup;
   public departments: Deparment[] = [];
-  private url: string;
-
 
   constructor(
+    private departmentService: DepartmentService,
     private router: Router,
-    private http: HttpClient,
     private fb: FormBuilder,
-    @Inject('BASE_URL') baseUrl: string) {
-    this.url = baseUrl + "api/department"
+  ) {
     this.filterForm = this.fb.group({
       'name': [null, Validators.required],
       'department': ["Select...", Validators.required],
@@ -41,23 +39,19 @@ export class FilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(this.url + "/all").subscribe(data => {
-      console.log(data);
-      this.departments = data['departmentList'];
-    })
+    this.departmentService.loadAll()
+      .subscribe(data => {
+        //        console.log(data);
+        this.departments = data['departmentList'];
+      })
   }
   onFilter() {
     this.checkOptionField();
     let searchResult = Object.entries(this.filterForm.value)
       .filter(([k, v]) => v != null)
       .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
-    console.log(searchResult);
-    this.router.navigate(['/'], {
-      queryParams: {
-        "query": "filter " + JSON.stringify(
-          searchResult)
-      }
-    });
+    //  console.log(searchResult);
+    this.router.navigate(['/'], { queryParams: { "query": "filter " + JSON.stringify(searchResult) } });
   }
 
   checkOptionField() {

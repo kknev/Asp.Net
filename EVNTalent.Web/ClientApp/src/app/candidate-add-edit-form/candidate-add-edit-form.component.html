@@ -7,8 +7,8 @@
         Person saved successfully!
       </div>
 
-      <div *ngIf="errors.Fatal" class="bg-danger" role="alert" >
-       {{errors.Fatal}}
+      <div *ngIf="_errors.Fatal" class="bg-danger" role="alert" >
+       {{_errors.Fatal}}
       </div>
 
 
@@ -21,9 +21,9 @@
                 <label class="control-label">First Name</label>
                 <input formControlName="firstName" class="form-control"
                />
-                 <div class="alert alert-danger" role="alert" *ngIf="errors.FirstName.length > 0">
+                 <div class="alert alert-danger" role="alert" *ngIf="_errors.FirstName.length > 0">
                      <ul>
-                       <li *ngFor="let error of errors.FirstName">
+                       <li *ngFor="let error of _errors.FirstName">
                          {{error}}
                        </li>
                      </ul>
@@ -32,9 +32,9 @@
               <div class="form-group">
                 <label class="control-label">Middle Name</label>
                 <input formControlName="middleName" class="form-control" />
-                <div class="alert alert-danger" role="alert" *ngIf="errors.MiddleName.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.MiddleName.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.MiddleName">
+                    <li *ngFor="let error of _errors.MiddleName">
                       {{error}}
                     </li>
                   </ul>
@@ -44,9 +44,9 @@
                 <label class="control-label">Last Name</label>
                 <input formControlName="lastName" class="form-control"
                 placeholder="Last Name ..."/>
-                <div class="alert alert-danger" role="alert" *ngIf="errors.LastName.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.LastName.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.LastName">
+                    <li *ngFor="let error of _errors.LastName">
                       {{error}}
                     </li>
                   </ul>
@@ -61,9 +61,9 @@
                   <option *ngFor="let depart of departments" value="{{depart['name']}}">{{depart['name']}}</option>
 
                 </select>
-                <div class="alert alert-danger" role="alert" *ngIf="errors.DepartmentName.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.DepartmentName.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.DepartmentName">
+                    <li *ngFor="let error of _errors.DepartmentName">
                       {{error}}
                     </li>
                   </ul>
@@ -73,9 +73,9 @@
               <div class="form-group">
                 <label class="control-label">Education</label>
                 <input formControlName="education" class="form-control"  placeholder="Educaton / Level"/>
-                <div class="alert alert-danger" role="alert" *ngIf="errors.Education.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.Education.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.Education">
+                    <li *ngFor="let error of _errors.Education">
                       {{error}}
                     </li>
                   </ul>
@@ -87,9 +87,9 @@
 
                 <input  formControlName="birthDate" class="form-control"
                 type="date"  placeholder="{{birthDate}}"/>
-                <div class="alert alert-danger" role="alert" *ngIf="errors.BirthDate.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.BirthDate.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.BirthDate">
+                    <li *ngFor="let error of _errors.BirthDate">
                       {{error}}
                     </li>
                   </ul>
@@ -100,9 +100,9 @@
               <div class="form-group">
                 <label class="control-label">Score</label>
                 <input formControlName="score" class="form-control" type="number"/>
-                <div class="alert alert-danger" role="alert" *ngIf="errors.Score.length > 0">
+                <div class="alert alert-danger" role="alert" *ngIf="_errors.Score.length > 0">
                   <ul>
-                    <li *ngFor="let error of errors.Score">
+                    <li *ngFor="let error of _errors.Score">
                       {{error}}
                     </li>
                   </ul>
