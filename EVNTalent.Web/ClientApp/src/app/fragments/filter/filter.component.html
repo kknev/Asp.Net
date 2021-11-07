@@ -1,41 +1,50 @@
-<form class="d-flex" [formGroup]= "filterForm" (ngSubmit)="onFilter()">
-   
+<div class="container-fluid">
 
-    <div class="form-group">  
-        <label>Full Name:</label> <br>
-        <input formControlName="name" value="{{null}}" placeholder="Candidate Name..." />
-        <br>
-                <select formControlName="nameSort">
-                    <br>
-                    <option  value="0">A to Z</option>
-                    <option value="1">Z to A</option>
-            </select>
+<form class="form-inline"  [formGroup]= "filterForm" (ngSubmit)="onFilter()">
+
+
+    <div class="input-group">
+        <div class="input-group-text" id="basic-addon1">
+            <label class="">Name:</label>
+            <input formControlName="name" value="{{null}}" placeholder="Candidate Name..." />
+            <label>Sort:</label>
+                    <select formControlName="nameSort">
+                        <option  value="0">A to Z</option>
+                        <option value="1">Z to A</option>
+                     </select>
+        </div>
     </div>
 
-<div class="form-group">
-    <label>Department:</label> <br>
-    <select formControlName="department">
-        <option selected value="Select..." >Select...</option>
-        <option *ngFor="let _department of departments"
-        value="{{_department.name}}">{{_department.name}}</option>
+    <div class="input-group">
+        <div class="input-group-text" id="basic-addon1">
+        <label>Department:</label>
+        <select formControlName="department">
+            <option selected value="Select..." >Select...</option>
+            <option *ngFor="let _department of departments"
+            value="{{_department.name}}">{{_department.name}}</option>
+            </select>
+            <label>Sort:</label>
+            <select formControlName="departmentSort">
+                <option  value="0">A to Z</option>
+                <option value="1">Z to A</option>
         </select>
-        <br>
-        <select formControlName="departmentSort">
-            <option  value="0">A to Z</option>
-            <option value="1">Z to A</option>
-    </select>
+</div>
 </div>
 
-<div class="form-group">
+<div class="input-group">
+    <div class="input-group-text" id="basic-addon1">
     <label>Education:</label>
-    <input formControlName="education" value="{{null}}" class="form-control me-2" placeholder="Education..." />
+    <input formControlName="education" value="{{null}}"  placeholder="Education..." />
+    <label>Sort:</label>
     <select formControlName="educationSort">
         <option  value="0">A to Z</option>
         <option value="1">Z to A</option>
 </select>
 </div>
+</div>
 
-    <div class="form-group">
+<div class="input-group">
+    <div class="input-group-text" id="basic-addon1">
         <label>Score:</label>
         <input formControlName="score" type="number"
         class="form-control me-2" placeholder="Score..." />
@@ -44,13 +53,16 @@
             <option value="0">Under</option>
             <option value="1">Over</option>
         </select>
+        <label>Sort:</label>
         <select formControlName="scoreSort">
             <option  value="0">1 >> 9 </option>
             <option  value="1">9 >> 1</option>
     </select>
     </div>
+    </div>
 
-        <div class="form-group">
+    <div class="input-group">
+        <div class="input-group-text" id="basic-addon1">
             <label >Birth Date:</label>
             <input value="{{null}}" formControlName="birthYaer" type="date"
             class="form-control me-2"  placeholder="Year of Birth" />
@@ -59,10 +71,13 @@
                 <option value="0">Before</option>
                 <option value="1">After</option>
             </select>
+            <label>Sort:</label>
             <select formControlName="birthYearSort">
                 <option  value="0">1 >> 9 </option>
                 <option  value="1">9 >> 1</option>
         </select>
         </div>
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
+        <button class="btn btn-outline-success me-2" type="submit">Search</button>
 </form>
+</div>

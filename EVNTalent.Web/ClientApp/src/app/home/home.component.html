@@ -1,20 +1,35 @@
-<div>
 
-    <div class="nav-item dropdown">
-      <app-filter></app-filter>
+
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <app-filter></app-filter>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Clear</a>
+            </li>
+        </ul>
+      </div>
     </div>
-  
-    <div class="nav-item dropdown">
-        <a class="navbar-brand" href="/">Show All</a>
-    </div>
-      <h1 >All Candidates: </h1>
+  </nav>
+
+  <h1 >All Candidates: </h1>
       <table class="css-serial">
         <thead>
           <tr>
             <th>
               NO
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-  
+
               </div>
             </th>
             <th>
@@ -59,56 +74,56 @@
           </tr>
         </thead>
         <tbody>
-     
-          
+
+
           <tr  *ngFor="let user of users" >
+
             <td>&nbsp;</td>
-  
+
             <td>
-              {{user.fullName}}
+              <a  href="/details/{{user.id}}">
+                {{user.fullName}}
+              </a>
             </td>
-  
+
             <td>
-              {{user.departmentName}}
             </td>
-  
+
             <td>
               {{user.education}}
             </td>
-  
+
             <td>
               {{user.score}}
             </td>
-  
+
             <td>
               {{user.birthDate}}
             </td>
-  
+
             <td>
               {{user.code}}
-  
             </td>
+
             <td>
-              <div class="nav-item dropdown">
-                  <a class="navbar-brand"  href="/details/{{user.id}}">Details</a>
-                  <a class="navbar-brand"  href="/edit/{{user.id}}">Edit</a>
-                  <button class="navbar-brand"  (click)="onDelete(user.id)">DELETE</button>
+              <div class="">
+                  <a class="btn btn-outline-success navbar-btn"  href="/edit/{{user.id}}">Edit</a>
+                  <button class="btn btn-danger navbar-btn"  (click)="onDelete(user.id)">DELETE</button>
               </div>
             </td>
           </tr>
-  
+
         </tbody>
       </table>
-  
-      <div class="container"*ngIf="users.length==0"> 
+
+      <div class="container"*ngIf="users.length==0">
         <div class="row">
-          <div class="col-sm"> 
+          <div class="col-sm">
         <h3 *ngIf="mypage" >You've not added Candidates</h3>
         <h3 *ngIf="!mypage" >No Candidates</h3>
         <p class="navbar-brand">You can <a  href="/create">Add new Candidate</a></p>
       </div>
       </div>
       </div>
-    </div>
-  
-  
+</div>
+

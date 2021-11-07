@@ -23,7 +23,7 @@ table th {
   counter-increment: serial-number; /* Increment the serial number counter */
   content: counter(serial-number); /* Display the counter */
  }
-
+/*nav*/
  .site-header .navbar-nav .nav-link {
   font-size: 1.1rem;
   color: #cbd5db;
@@ -56,12 +56,64 @@ a {
   color: #0366d6;
 }
 
-code {
-  color: #e01a76;
+
+
+
+
+.menu-item {
+    font-size: 18px;
+    line-height: 22px;
+    padding: 0 24
+px
+;
+}
+li {
+    font-size: inherit;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
 }
+.main-menu {
+    list-style: none outside;
+    font-size: 0;
+    margin: 0;
+    overflow: hidden;
+}
+ul {
+    margin-left: 1.25 rem;
+    list-style-type: disc;
+}
+ul {
+    margin-bottom: 24 px
+;
+    list-style-position: outside;
+    line-height: 1.4;
+}
+user agent stylesheet
+ul {
+    list-style-type: disc;
+}
+.grid-x {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+html.nav-is-open, html.nav-is-open body {
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    position: fixed;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
