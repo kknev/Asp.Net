@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Deparment } from 'src/app/models/Deparment';
+import { FilterForm, FilterResult } from 'src/app/models/Filter';
 import { DepartmentService } from 'src/app/services/candidate/department.service';
 
 @Component({
@@ -19,22 +20,7 @@ export class FilterComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
   ) {
-    this.filterForm = this.fb.group({
-      'name': [null, Validators.required],
-      'department': ["Select...", Validators.required],
-      'education': [null, Validators.required],
-      'score': [null, Validators.required],
-      'arrowScore': ["Current", Validators.required],
-      'birthYaer': [null, Validators.required],
-      'arrowBirth': ["Current", Validators.required],
-
-      'nameSort': [null, Validators.required],
-      'departmentSort': [null, Validators.required],
-      'educationSort': [null, Validators.required],
-      'scoreSort': [null, Validators.required],
-      'birthYearSort': [null, Validators.required],
-
-    });
+    this.filterForm = this.fb.group(FilterForm());
 
   }
 
@@ -46,25 +32,10 @@ export class FilterComponent implements OnInit {
       })
   }
   onFilter() {
-    this.checkOptionField();
-    let searchResult = Object.entries(this.filterForm.value)
-      .filter(([k, v]) => v != null)
-      .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
-    //  console.log(searchResult);
-    this.router.navigate(['/'], { queryParams: { "query": "filter " + JSON.stringify(searchResult) } });
+    this.router.navigate(['/'], { queryParams: { "query": "filter " + JSON.stringify(FilterResult(this.filterForm.value)) } });
   }
 
-  checkOptionField() {
-    this.filterForm.value['department'] = this.filterForm.value['department'] == "Select..."
-      ? null
-      : this.filterForm.value['department'];
-    this.filterForm.value['arrowScore'] = this.filterForm.value['arrowScore'] == "Current"
-      ? null
-      : this.filterForm.value['arrowScore'];
-    this.filterForm.value['arrowBirth'] = this.filterForm.value['arrowBirth'] == "Current"
-      ? null
-      : this.filterForm.value['arrowBirth'];
-  }
+
   get name() { return this.filterForm.get('name') }
   get department() { return this.filterForm.get('department') }
   get education() { return this.filterForm.get('education') }
@@ -81,6 +52,3 @@ export class FilterComponent implements OnInit {
 
 }
 
-export interface Deparment {
-  name: string
-}

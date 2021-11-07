@@ -11,6 +11,7 @@ import { CandidateDetailsComponent } from './candidate-details/candidate-details
 import { FilterComponent } from './fragments/filter/filter.component';
 import { FooterComponent } from './fragments/footer/footer.component';
 import { NavBarComponent } from './fragments/nav-bar/nav-bar.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NavBarComponent } from './fragments/nav-bar/nav-bar.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    AgGridModule.withComponents(null),
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,

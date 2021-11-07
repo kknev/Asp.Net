@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Deparment } from '../fragments/filter/filter.component';
+import { CandidateCreateForm } from '../models/Candidate';
+import { Deparment } from '../models/Deparment';
 import { CandidateService } from '../services/candidate/candidate.service';
 import { DepartmentService } from '../services/candidate/department.service';
 import { ErrorService } from '../services/errors/error.service';
@@ -29,42 +30,37 @@ export class CandidateAddEditFormComponent implements OnInit {
     private departmentService: DepartmentService,
     private errService: ErrorService,
     private fb: FormBuilder) {
+
     this.id = this.activateRoute.snapshot.params['id'];
-    this.createForm = this.OnIt();
+    this.createForm = this.fb.group(CandidateCreateForm());
   }
 
   ngOnInit(): void {
     this.id = this.activateRoute.snapshot.params['id'];
     this.departmentService.loadAll().subscribe(data => this.departments = data['departmentList'])
+
     this.isEditMode = this.id != undefined && this.id.length > 0;
     this.isEditMode
       ? this.candidateService.loadCandidate(this.id).subscribe(result => {
         //  console.log(result)
         this.createForm.setValue(result['candidate']);
       })
-      : this.createForm = this.OnIt();
+      : this.createForm = this.fb.group(CandidateCreateForm());
   }
-  OnIt = () => this.fb.group({
-    'id': [null, Validators.required],
-    'firstName': [null, Validators.required],
-    'middleName': [null, Validators.required],
-    'lastName': ['', Validators.required],
-    'departmentName': ['Select...', Validators.required],
-    'birthDate': [null, Validators.required],
-    'education': ['', Validators.required],
-    'code': [null, Validators.required],
-    'score': [0, Validators.required],
-  });
+
 
   onCreate() {
-    this._errors = this.errService.newError();;
+    this._errors = this.errService.newError();
+
+
     this.createForm.value['birthDate']
       ? null
       : this.createForm.value['birthDate'] = '1969-01-01';
+
     if (!this.isEditMode) {
       this.candidateService.createCandidate(this.createForm.value)
         .subscribe(data => {
-          console.log(data["id"])
+          //   console.log(data["id"])
           this.successfulSave = true;
           this.router.navigate(['/details/' + data['id']])
         }, err => {

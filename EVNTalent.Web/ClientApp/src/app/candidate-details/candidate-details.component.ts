@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { onDelete } from '../events/delete';
+import { Candidate } from '../models/Candidate';
 import { CandidateService } from '../services/candidate/candidate.service';
 
 @Component({
@@ -11,7 +13,7 @@ import { CandidateService } from '../services/candidate/candidate.service';
 export class CandidateDetailsComponent implements OnInit {
 
   id: string = "";
-  user = new ClassUser;
+  user = new Candidate;
 
   constructor(private activateRouter: ActivatedRoute,
     private router: Router, private candidateService: CandidateService,
@@ -31,38 +33,20 @@ export class CandidateDetailsComponent implements OnInit {
       });
   }
   onDelete() {
-    this.candidateService.delete(this.id)
-      .subscribe(result => {
-        console.log('Result from action delete: ' + result)
-        this.router.navigate(['/']);
-      })
-  }
+    if (!this.id) {
+      alert('No identifer');
+    }
+    var x = confirm("Are you sure you want to delete?");
 
-}
+    if (x) {
 
-export class ClassUser {
-  constructor() {
-    this.firstName = "";
-    this.lastName = "";
-    this.middleName = "";
-    this.id = "";
-    this.departmentName = "";
-    this.education = "";
-    this.birthDate = new Date("1978-02-03");
-    this.user = "";
-    this.isOwner = false;
-    this.score = 0;
-    this.isDeleted = false;
+      this.candidateService.delete(this.id)
+        .subscribe(result => {
+          console.log('Result from action delete: ' + result)
+          this.router.navigate(['/'])
+        });
+    }
+
+
   }
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  id: string;
-  departmentName: string;
-  education: string;
-  birthDate: Date;
-  score: number;
-  user: string;
-  isOwner: boolean;
-  isDeleted: boolean;
 }
