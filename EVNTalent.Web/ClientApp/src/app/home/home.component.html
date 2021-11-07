@@ -1,6 +1,6 @@
 
 
-<div>
+<div class="row position-relative">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -21,8 +21,10 @@
       </div>
     </div>
   </nav>
-
-  <h1 >All Candidates: </h1>
+  <div class="row"></div>
+  <h3>All Candidates: </h3>
+  <div class="row"></div>
+  <div class="row">
       <table class="css-serial">
         <thead>
           <tr>
@@ -35,36 +37,36 @@
             <th>
               Full Name
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <a class="btn btn-primary active" href="/?query=sort%20name%20asc"> ↑ </a>
-                <a class="btn btn-primary active" href="/?query=sort%20name%20desc">↓</a>
+                <a class="order" href="/?query=sort%20name%20asc"> ↑ </a>
+                <a class="order" href="/?query=sort%20name%20desc">↓</a>
                 </div>
             </th>
             <th>
               Department
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <a class="btn btn-primary active" href="/?query=sort%20department%20asc"> ↑ </a>
-                <a class="btn btn-primary active" href="/?query=sort%20department%20desc">↓</a>
+                <a class="order" href="/?query=sort%20department%20asc"> ↑ </a>
+                <a class="order" href="/?query=sort%20department%20desc">↓</a>
                 </div>
             </th>
             <th>
               Education
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <a class="btn btn-primary active" href="/?query=sort%20education%20asc"> ↑ </a>
-                <a class="btn btn-primary active" href="/?query=sort%20education%20desc">↓</a>
+                <a class="order" href="/?query=sort%20education%20asc"> ↑ </a>
+                <a class="order" href="/?query=sort%20education%20desc">↓</a>
                 </div>
             </th>
             <th>
               Score (Grade)
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <a class="btn btn-primary active" href="/?query=sort%20score%20asc"> ↑ </a>
-                <a class="btn btn-primary active" href="/?query=sort%20score%20desc">↓</a>
+                <a class="order" href="/?query=sort%20score%20asc"> ↑ </a>
+                <a class="order" href="/?query=sort%20score%20desc">↓</a>
                 </div>
             </th>
             <th>
               Date of Birth
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <a class="btn btn-primary active" href="/?query=sort%20birthyear%20asc">↑</a>
-                <a class="btn btn-primary active" href="/?query=sort%20birthyear%20desc">↓</a>
+                <a class="order" href="/?query=sort%20birthyear%20asc">↑</a>
+                <a class="order" href="/?query=sort%20birthyear%20desc">↓</a>
                 </div>
             </th>
             <th>
@@ -85,8 +87,8 @@
                 {{user.fullName}}
               </a>
             </td>
-
             <td>
+              {{user.departmentName}}
             </td>
 
             <td>
@@ -107,7 +109,7 @@
 
             <td>
               <div class="">
-                  <a class="btn btn-outline-success navbar-btn"  href="/edit/{{user.id}}">Edit</a>
+                  <a class="btn btn-success navbar-btn"  href="/edit/{{user.id}}">Edit</a>
                   <button class="btn btn-danger navbar-btn"  (click)="onDelete(user.id)">DELETE</button>
               </div>
             </td>
@@ -115,7 +117,9 @@
 
         </tbody>
       </table>
-
+</div>
+<div class="row"></div>
+<div class="row">
       <div class="container"*ngIf="users.length==0">
         <div class="row">
           <div class="col-sm">
@@ -123,7 +127,7 @@
         <h3 *ngIf="!mypage" >No Candidates</h3>
         <p class="navbar-brand">You can <a  href="/create">Add new Candidate</a></p>
       </div>
-      </div>
+      </div></div>
       </div>
 </div>
 
