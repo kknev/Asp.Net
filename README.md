@@ -1,4 +1,4 @@
-Sort and Filter use LINQ (Language-Integrated Query) 
+**Sort** and **Filter** use **LINQ** (Language-Integrated Query) 
 Server bind via query string params about name of entity`s proprty and value which contains asc/desc for sort and value for property contains.
 Algoritm recieve as example : 
 	1. sort by Score in Descending (score%20desc). 
