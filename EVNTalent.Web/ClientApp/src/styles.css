@@ -55,16 +55,43 @@ table th {
 a {
   color: #0366d6;
 }
-
+table a{color: black;}
 .order{
- padding: 20%;
- margin: auto;
- border-radius: 3px;
- background-color: #ffffff;
-
+ padding: 2px;
+ margin: 2px;
+ color: #ccc;
+border-style: ridge;
+ border-radius:  4p;
 }
+.btn-options{
+margin: 2 px;
+padding: 2 px;
+border-radius:  3px;
+color: white;
+}
+.edit{
+background-color: green;
+  }
+  .delete{
+
+    background-color: red;
+  }
+  .details{margin: 10px;}
+
 .body{
   padding-left: 2%;
   padding-right: 2%;
 
+}
+
+.navbar {
+  background-color: crimson;
+
+}
+.navbar a{ color: whitesmoke;}
+
+footer{background-color: grey;}
+footer span{
+  color: whitesmoke;
+  font-size: 70%;
 }

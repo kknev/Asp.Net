@@ -3,12 +3,12 @@
 <div class="row position-relative">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class=" navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filter
+                Filter ☰
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <app-filter></app-filter>
@@ -109,8 +109,8 @@
 
             <td>
               <div class="">
-                  <a class="btn btn-success navbar-btn"  href="/edit/{{user.id}}">Edit</a>
-                  <button class="btn btn-danger navbar-btn"  (click)="onDelete(user.id)">DELETE</button>
+                 <a href="/edit/{{user.id}}"><button class="btn-options edit">Edit</button></a>
+                  <button class="btn-options delete"  (click)="onDelete(user.id)">DELETE</button>
               </div>
             </td>
           </tr>
@@ -123,8 +123,7 @@
       <div class="container"*ngIf="users.length==0">
         <div class="row">
           <div class="col-sm">
-        <h3 *ngIf="mypage" >You've not added Candidates</h3>
-        <h3 *ngIf="!mypage" >No Candidates</h3>
+        <h3  >No Candidates</h3>
         <p class="navbar-brand">You can <a  href="/create">Add new Candidate</a></p>
       </div>
       </div></div>

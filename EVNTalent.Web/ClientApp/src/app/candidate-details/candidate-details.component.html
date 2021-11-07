@@ -1,6 +1,8 @@
-<div>
-    <div>
-  
+<div class="row">
+  <div class="col-lg-12">
+    <h2>Details</h2>
+  </div>
+  <div class="col-lg-9 col-sm-4 col-md-6 ">
           <div class="form-group">
               <label class="control-label">First Name</label>
               <input  class="form-control" disabled value="{{user.firstName}}"
@@ -16,24 +18,24 @@
               <input  class="form-control" disabled value="{{user.lastName}}"
            />
             </div>
-  
-  
+
+
             <div class="form-group">
               <label class="control-label">Department Name </label>
-              <input  class="form-control" disabled value="{{user.departmentName}}"/> 
+              <input  class="form-control" disabled value="{{user.departmentName}}"/>
             </div>
-  
+
             <div class="form-group">
               <label class="control-label">Education</label>
               <input  class="form-control" disabled value="{{user.education}}"
               />
-            
+
           </div>
-  
+
           <div class="form-group">
             <label class="control-label">Birth Date</label>
             <input  class="form-control"  disabled  value="{{user.birthDate}}"/>
-           
+
           </div>
 
 
@@ -44,8 +46,9 @@
 
 
           <div  class="form-group">
-              <a class="navbar-brand" type="button" (click)="onDelete()">Remove</a>
-              <a class="navbar-brand" href="/edit/{{user.id}}">Edit</a>
+           <button class="btn-options delete details" (click)="onDelete()">Delete</button>
+
+              <a  href="/edit/{{user.id}}"> <button class="btn-options edit details" >Edit</button> </a>
           </div>
         </div>
   </div>

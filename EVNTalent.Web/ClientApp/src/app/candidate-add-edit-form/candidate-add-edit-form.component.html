@@ -1,18 +1,18 @@
-<div>
+<div class="">
 
-    <h2 *ngIf="isEditMode"> Details</h2>
+    <h2 *ngIf="isEditMode"> Update Details</h2>
     <h2 *ngIf="!isEditMode"> Create New Candidate</h2>
-    
+
       <div class="alert alert-success" role="alert" *ngIf="successfulSave">
         Person saved successfully!
       </div>
-    
+
       <div *ngIf="errors.Fatal" class="bg-danger" role="alert" >
        {{errors.Fatal}}
       </div>
-    
+
       <form [formGroup]= "createForm" (ngSubmit)="onCreate()">
-    
+
             <div class="form-group">
                 <label class="control-label">First Name</label>
                 <input formControlName="firstName" class="form-control"
@@ -48,14 +48,14 @@
                   </ul>
                 </div>
               </div>
-    
-    
+
+
               <div class="form-group">
                 <label class="control-label">Department Name </label>
                 <select formControlName="departmentName" class="form-control">
                   <option selected> Select...</option>
                   <option *ngFor="let depart of departments" value="{{depart['name']}}">{{depart['name']}}</option>
-    
+
                 </select>
                 <div class="alert alert-danger" role="alert" *ngIf="errors.DepartmentName.length > 0">
                   <ul>
@@ -65,7 +65,7 @@
                   </ul>
                 </div>
               </div>
-    
+
               <div class="form-group">
                 <label class="control-label">Education</label>
                 <input formControlName="education" class="form-control"
@@ -78,7 +78,7 @@
                   </ul>
                 </div>
             </div>
-    
+
               <div class="form-group">
                 <label class="control-label">Birth Date</label>
                 <input formControlName="birthDate" class="form-control" value="{{birthDate}}" type="date" />
@@ -90,8 +90,8 @@
                   </ul>
                 </div>
               </div>
-    
-    
+
+
               <div class="form-group">
                 <label class="control-label">Score</label>
                 <input formControlName="score" class="form-control" type="number"/>
@@ -103,8 +103,8 @@
                   </ul>
                 </div>
               </div>
-    
-    
+
+
               <div class="form-group">
                 <input type="submit" *ngIf="isEditMode" value="Update" class="btn btn-primary" />
                 <input type="submit" *ngIf="!isEditMode" value="Create" class="btn btn-primary" />
