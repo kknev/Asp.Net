@@ -60,7 +60,7 @@ namespace EVNTalent.Tests
         [Test]
         public void Filter()
         {
-            var result = _controller.filter( new FilterCandidateQeury());
+            var result = _controller.Filter( new FilterCandidateQeury());
             result.Should().BeOfType<Task<IActionResult>>();
         }
         [Test]
