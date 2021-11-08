@@ -19,6 +19,7 @@
         {
             _validationRules = validationRules;
         }
+        
         [HttpGet]
         [Route("all")]
         public async Task<IActionResult> GetAll()
@@ -26,6 +27,7 @@
             var result = await _mediator.Send(new CandidateListQuery { });
             return Ok(result);
         }
+        
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> Create(AddCandidateCommand model)
@@ -95,6 +97,7 @@
             var result = await _mediator.Send(filter);
             return Ok(result);
         }
+       
         [HttpGet]
         [Route("sort")]
         public async Task<IActionResult> Sort([FromQuery] string query)
