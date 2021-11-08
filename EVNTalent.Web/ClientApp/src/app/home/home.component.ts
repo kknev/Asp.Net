@@ -12,10 +12,25 @@ import { CandidateService } from '../services/candidate/candidate.service';
 export class HomeComponent implements OnInit {
 
   public users: CandidateShrotView[] = [];
+  // columnDefs = [
 
+  //   { headerName: 'Full Name', field: 'fullName', sortable: true, filter: true },
+  //   { headerName: 'Department', field: 'departmentName', sortable: true, filter: true },
+  //   { headerName: 'Educaton', field: 'education', sortable: true, filter: true },
+  //   { headerName: 'Score', field: 'score', sortable: true, filter: true },
+  //   { headerName: 'Birth Date', field: 'birthDate', sortable: true },
+  //   { headerName: 'Code', field: 'code', sortable: true },
+  //   { headerName: 'Options', field: 'options' }
+  // ];
+  // defaultColDef = {
+  //   flex: 1,
+  //   minWidth: 100,
+  // };
+  // rowSelection = 'single';
 
   rowData = [];
   constructor(
+
     private activateRouter: ActivatedRoute,
     private candidateService: CandidateService,
   ) {

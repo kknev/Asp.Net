@@ -90,18 +90,16 @@
 
         [HttpPost]
         [Route("filter")]
-        public async Task<IActionResult> filter(FilterCandidateQeury filter)
+        public async Task<IActionResult> Filter(FilterCandidateQeury filter)
         {
             var result = await _mediator.Send(filter);
             return Ok(result);
         }
         [HttpGet]
         [Route("sort")]
-        public async Task<IActionResult> Sort([FromQuery] String query)
+        public async Task<IActionResult> Sort([FromQuery] string query)
         {
-           
-            SortByCandidateQuery _sort = new SortByCandidateQuery {   Query=query };
-            var result = await _mediator.Send(_sort);
+            var result = await _mediator.Send(new SortByCandidateQuery { Query = query });
             return Ok(result);
         }
     }

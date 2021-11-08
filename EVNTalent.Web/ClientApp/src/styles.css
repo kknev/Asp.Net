@@ -81,11 +81,7 @@ background-color: green;
 
   .details{margin: 10px;}
 
-.body{
-  padding-left: 2%;
-  padding-right: 1%;
 
-}
 
 .navbar {
   background-color: crimson;
@@ -107,4 +103,16 @@ footer span{
 }
 .back{
   background-color: blue;
+}
+html, body {
+  margin:0px;
+  height:100%;
+}
+.body {
+  margin:2%;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
 }

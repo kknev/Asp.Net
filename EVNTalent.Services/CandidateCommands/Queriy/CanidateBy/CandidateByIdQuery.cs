@@ -9,6 +9,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     public   class CandidateByIdQuery : IRequest<CandidateByIdQueryResult>
     {
@@ -26,10 +27,10 @@
             // Candidate candidate = await _data.Candidates.FindAsync( request.Id);
             return new CandidateByIdQueryResult
             {
-                Candidate = _data.Candidates
+                Candidate = await _data.Candidates
                                 .Where(c => c.Id.ToString().Equals(request.Id) && !c.IsDeleted)
                                 .ProjectTo<CandidateDetailsViewModel>(_mapper)
-                                .FirstOrDefault()
+                                .FirstOrDefaultAsync(cancellationToken)
         };
         }
     }

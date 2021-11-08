@@ -11,7 +11,9 @@
     using EVNTalent.Services.Common.Infrastructure;
     using EVNTalent.Services.Common.Interfaces;
     using MediatR;
-     public   class SortByCandidateQuery : IRequest<CandidateListQueryResult>{public string Query { get; set; }
+    using Microsoft.EntityFrameworkCore;
+
+    public   class SortByCandidateQuery : IRequest<CandidateListQueryResult>{public string Query { get; set; }
       }
 
     public class SortByCandidateQueryHandler : AppIRequestHandler<SortByCandidateQuery, CandidateListQueryResult>
@@ -26,7 +28,7 @@
             var query = SortQuery.Sort(_data.Candidates.AsQueryable(), sort[0], sort[1]);
             return new CandidateListQueryResult
             {
-                Candidates = query.ProjectTo<CandidateViewModel>(_mapper).ToList()
+                Candidates =await query.ProjectTo<CandidateViewModel>(_mapper).ToListAsync(cancellationToken)
             };
         }
     }

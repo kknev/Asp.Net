@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { onDelete } from '../events/delete';
 import { Candidate } from '../models/Candidate';
 import { CandidateService } from '../services/candidate/candidate.service';
 

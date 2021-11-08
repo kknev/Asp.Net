@@ -8,6 +8,7 @@
     using EVNTalent.Services.Common.Infrastructure;
     using EVNTalent.Services.Common.Interfaces;
     using MediatR;
+    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -38,7 +39,7 @@
            var query = FilterQuery.FilterByField(_data.Candidates.AsQueryable(), request);
             return new CandidateListQueryResult
             {
-                Candidates = query.ProjectTo<CandidateViewModel>(_mapper).ToList()
+                Candidates = await query.ProjectTo<CandidateViewModel>(_mapper).ToListAsync(cancellationToken)
             };
         }
     }

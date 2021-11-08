@@ -28,7 +28,7 @@
             Candidates= await _data.Candidates
             .Where(c=>!c.IsDeleted)
             .ProjectTo<CandidateViewModel>(_mapper)
-            .ToListAsync()
+            .ToListAsync(cancellationToken)
             };
         }
     }
